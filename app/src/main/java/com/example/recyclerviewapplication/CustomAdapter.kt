@@ -7,40 +7,40 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomAdapter (private val dataSet: Array<String>) :
+class CustomAdapter(val dataSet: ArrayList<String>, mainActivity: MainActivity) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        lateinit var firstName : TextView
-        lateinit var lastName : TextView
 
-
-
-        init {
-            // Define click listener for the ViewHolder's View.
-//            textView = view.findViewById(R.id.textView)
-        }
-    }
-
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.activity_main, viewGroup, false)
+            .inflate(R.layout.text_row_item, viewGroup, false)
 
         return ViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-//        viewHolder.textView.text = dataSet[position]
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+     var details:String = dataSet[position]
+
+       viewHolder.detailsText.text = details
+
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+     val detailsText:TextView
+     val detailsText1:TextView
+     val detailsText2:TextView
+
+        init {
+            detailsText = view.findViewById(R.id.fName)
+            detailsText1 = view.findViewById(R.id.lName)
+            detailsText2 = view.findViewById(R.id.addName)
+        }
+    }
+
 
 }

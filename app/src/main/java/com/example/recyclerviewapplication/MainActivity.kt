@@ -2,28 +2,33 @@ package com.example.recyclerviewapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.GridLayoutManager as GridLayoutManager
 
 class MainActivity : AppCompatActivity() {
+
+    val arrList: ArrayList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val arrContact = ArrayList<UserEntity>()
-        
-        arrContact.add(UserEntity("Pritam", "Patidar"))
-        arrContact.add(UserEntity("Lakhan", "Patidar"))
-        arrContact.add(UserEntity("xyz", "Patidar"))
-        arrContact.add(UserEntity("Pavan", "Patidar"))
+        addData()
 
-        val recyclerView: RecyclerView? = null
+       var recyclerView:RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        if (recyclerView != null) {
-            recyclerView.layoutManager = GridLayoutManager(this,2)
-        }
-        
+        recyclerView.adapter = CustomAdapter(arrList,this)
 
+
+    }
+    var firstName:String = "Pritam"
+    var lastName:String = "Patidar"
+    var address:String = "B-67, Vidhya Nagar,Bhopal"
+    private fun addData() {
+        arrList.add("First Name : "+firstName)
+        arrList.add("Last Name : "+lastName)
+        arrList.add("Address : "+address)
     }
 }
